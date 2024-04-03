@@ -18,6 +18,9 @@
 			<index name="pk_dim_location" unique="PRIMARY_KEY" >
 				<column name="location_id" />
 			</index>
+			<index name="unq_address" unique="UNIQUE_INDEX" >
+				<column name="address" />
+			</index>
 		</table>
 		<table name="dim_neighborhood" prior="dim_neighborhoodd" >
 			<column name="neighborhood_id" prior="location_id" type="BIGINT" jt="-5" mandatory="y" />
@@ -49,22 +52,35 @@
 			<column name="total_units" type="INT" jt="4" />
 			<column name="land_sq_feet" type="INT" jt="4" />
 			<column name="gross_sq_feet" type="INT" jt="4" />
-			<column name="property_id" type="INT" jt="4" />
+			<column name="property_id" type="INT" jt="4" mandatory="y" />
 			<column name="residential_units" type="INT" jt="4" />
 			<column name="commercial_units" type="INT" jt="4" />
 			<index name="pk_facts_properties" unique="PRIMARY_KEY" >
 				<column name="fact_id" />
+				<column name="property_id" />
 			</index>
+			<fk name="fk_facts_properties_dim_location" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="location_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_date" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="date_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_neighborhood" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_neighborhood" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="neighborhood_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_property_type" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_property_type" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="property_type_id" />
+			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="561" y="204" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="153" y="204" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhood" color="C1D8EE" x="119" y="459" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="561" y="459" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="fact_neighborhoods" color="C1D8EE" x="340" y="527" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="272" />
-		<callout x="51" y="51" pointer="Round" >
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="612" y="204" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="85" y="204" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhood" color="C1D8EE" x="51" y="408" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="595" y="391" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="fact_neighborhoods" color="3986C1" x="357" y="510" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="204" />
+		<callout x="68" y="51" pointer="Round" >
 			<comment><![CDATA[This is a layout - a diagram with tools.
 - Create new entities by right-clicking the layout. 
 - Double-click entity headers to edit.
