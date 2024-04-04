@@ -37,6 +37,13 @@
 				<column name="property_type_id" />
 			</index>
 		</table>
+		<table name="dim_year_built" >
+			<column name="year_id" type="INT" jt="4" mandatory="y" />
+			<column name="year" type="INT" jt="4" />
+			<index name="pk_dim_year_built" unique="PRIMARY_KEY" >
+				<column name="year_id" />
+			</index>
+		</table>
 		<table name="fact_neighborhoods" prior="fact_neighborhood" >
 			<column name="price_per_sqft" type="INT" jt="4" />
 			<column name="mean_per_sqft" type="INT" jt="4" />
@@ -45,6 +52,7 @@
 			<column name="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="number_of_sales" type="INT" jt="4" />
 		</table>
 		<table name="facts_properties" >
 			<column name="fact_id" type="BIGINT" jt="-5" mandatory="y" />
@@ -71,6 +79,9 @@
 			<fk name="fk_facts_properties_dim_property_type" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_property_type" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
 				<fk_column name="property_id" pk="property_type_id" />
 			</fk>
+			<fk name="fk_facts_properties_dim_year_built" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_year_built" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="year_id" />
+			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
@@ -78,7 +89,8 @@
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="85" y="204" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhood" color="C1D8EE" x="51" y="408" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="595" y="391" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="fact_neighborhoods" color="3986C1" x="357" y="510" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_year_built" color="C1D8EE" x="391" y="527" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="fact_neighborhoods" color="3986C1" x="119" y="578" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="204" />
 		<callout x="68" y="51" pointer="Round" >
 			<comment><![CDATA[This is a layout - a diagram with tools.
