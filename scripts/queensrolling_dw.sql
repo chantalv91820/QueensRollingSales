@@ -2,17 +2,22 @@
 
 CREATE SCHEMA INSTANCE;
 
+CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_borough ( 
+	borough_id int64 NOT NULL  ,
+	borough_name int64  
+ );
+
+ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_borough ADD PRIMARY KEY ( borough_id )  NOT ENFORCED;
+
 CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_date ( 
 	date_id int64 NOT NULL  ,
-	date_iso_format datetime  ,
-	sale_date date  ,
+	dateIsoformat datetime  ,
 	month_number int64  ,
 	month_name string  ,
 	day_name string  ,
 	day_number int64  ,
 	weekofMonth int64  ,
-	weekofYear int64  ,
-	year_sold int64  
+	weekofYear int64  
  );
 
 ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_date ADD PRIMARY KEY ( date_id )  NOT ENFORCED;
@@ -33,7 +38,7 @@ CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_neighborhoods (
 	avg_price numeric  ,
 	max_price numeric  ,
 	min_price numeric  ,
-	number_of_sales int64  
+	number_sales int64  
  );
 
 ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_neighborhoods ADD PRIMARY KEY ( neighborhood_id )  NOT ENFORCED;
@@ -45,13 +50,6 @@ CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_property_type (
  );
 
 ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_property_type ADD PRIMARY KEY ( property_type_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_year_built ( 
-	year_id int64 NOT NULL  ,
-	year int64  
- );
-
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_year_built ADD PRIMARY KEY ( year_id )  NOT ENFORCED;
 
 CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.facts_properties ( 
 	fact_id int64 NOT NULL  ,
@@ -65,7 +63,15 @@ CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.facts_properties (
 	price_per_sqft numeric  ,
 	mean_per_sqft numeric  ,
 	square_differences_mean numeric  ,
-	variance_per_sqft numeric  
+	variance_per_sqft numeric  ,
+	year_built int64  ,
+	neighborhood_id int64  ,
+	property_type_id int64  ,
+	borough_id int64  ,
+	sale_date date  ,
+	year_sold date  ,
+	location_id int64  
  );
 
 ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.facts_properties ADD PRIMARY KEY ( fact_id, property_id )  NOT ENFORCED;
+
