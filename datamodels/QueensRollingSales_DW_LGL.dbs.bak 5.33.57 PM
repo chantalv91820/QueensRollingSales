@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="QueensRollingSales_DW_LGL" id="LogicalDesign-1125" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="QueensRollingSales_DW_LGL" >
+		<table name="dim_borough" prior="dim_year_built" >
+			<column name="borough_id" prior="year_id" type="INT" jt="4" mandatory="y" />
+			<column name="borough_name" prior="year" type="INT" jt="4" />
+			<index name="pk_dim_year_built" unique="PRIMARY_KEY" >
+				<column name="borough_id" />
+			</index>
+		</table>
+		<table name="dim_date" >
+			<column name="date_id" prior="sale_date" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="date_iso_format" type="DATETIME" jt="93" />
+			<column name="month_number" type="INT" jt="4" />
+			<column name="month_name" type="VARCHAR" length="25" jt="12" />
+			<column name="day_name" type="VARCHAR" length="15" jt="12" />
+			<column name="day_number" type="INT" jt="4" />
+			<column name="weekofMonth" type="INT" jt="4" />
+			<column name="weekofYear" type="INT" jt="4" />
+			<index name="pk_dim_date" unique="PRIMARY_KEY" >
+				<column name="date_id" />
+			</index>
+		</table>
+		<table name="dim_location" prior="dim_neighborhood" >
+			<column name="location_id" prior="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="address" type="VARCHAR" jt="12" />
+			<column name="zip_code" type="INT" jt="4" />
+			<column name="block" type="INT" jt="4" />
+			<column name="lot" type="INT" jt="4" />
+			<index name="pk_dim_location" unique="PRIMARY_KEY" >
+				<column name="location_id" />
+			</index>
+			<index name="unq_address" unique="UNIQUE_INDEX" >
+				<column name="address" />
+			</index>
+		</table>
+		<table name="dim_neighborhoods" prior="fact_neighborhoods" >
+			<column name="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="neighborhood_name" type="VARCHAR" length="30" jt="12" />
+			<column name="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="number_of_sales" type="INT" jt="4" />
+			<index name="pk_fact_neighborhoods" unique="PRIMARY_KEY" >
+				<column name="neighborhood_id" />
+			</index>
+		</table>
+		<table name="dim_property_type" >
+			<column name="property_type_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="building_class" type="VARCHAR" length="2" jt="12" />
+			<column name="tax_class" type="VARCHAR" length="2" jt="12" />
+			<index name="pk_dim_property_type" unique="PRIMARY_KEY" >
+				<column name="property_type_id" />
+			</index>
+		</table>
+		<table name="facts_properties" >
+			<column name="fact_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="property_id" type="INT" jt="4" mandatory="y" />
+			<column name="sale_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="total_units" type="INT" jt="4" />
+			<column name="land_sq_feet" type="INT" jt="4" />
+			<column name="gross_sq_feet" type="INT" jt="4" />
+			<column name="residential_units" type="INT" jt="4" />
+			<column name="commercial_units" type="INT" jt="4" />
+			<column name="price_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="mean_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="square_differences_mean" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="variance_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="year_built" prior="year_build" type="INT" jt="4" />
+			<column name="neighborhood_id" prior="neighborhood_ID" type="INT" jt="4" />
+			<column name="property_type_id" type="INT" jt="4" />
+			<column name="borough_id" type="INT" jt="4" />
+			<column name="sale_date" type="DATE" jt="91" />
+			<column name="year_sold" type="DATE" jt="91" />
+			<index name="pk_facts_properties" unique="PRIMARY_KEY" >
+				<column name="fact_id" />
+				<column name="property_id" />
+			</index>
+			<index name="unq_property_id" unique="UNIQUE_INDEX" >
+				<column name="property_id" />
+			</index>
+			<index name="unq_property_type_id" unique="UNIQUE_INDEX" >
+				<column name="property_type_id" />
+			</index>
+			<index name="unq_neighborhood_id" unique="UNIQUE_INDEX" >
+				<column name="neighborhood_id" />
+			</index>
+			<index name="unq_borough_id" unique="UNIQUE_INDEX" >
+				<column name="borough_id" />
+			</index>
+			<fk name="fk_facts_properties_dim_location" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="property_id" pk="location_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_borough" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_borough" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="borough_id" pk="borough_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_property_type" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_property_type" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="property_type_id" pk="property_type_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_neighborhoods" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_neighborhoods" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="neighborhood_id" pk="neighborhood_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_date" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="sale_date" pk="date_id" />
+			</fk>
+			<fk name="fk_facts_properties_dim_date_0" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="year_sold" pk="date_id" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_borough" color="C1D8EE" x="425" y="561" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="748" y="51" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="119" y="51" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="272" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="782" y="357" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="391" y="102" />
+	</layout>
+</project>
