@@ -3,8 +3,15 @@
 	<schema name="INSTANCE" catalogname="QueensRollingSales_DW_LGL" >
 		<table name="dim_date" >
 			<column name="date_id" prior="sale_date" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="date_iso_format" type="DATETIME" jt="93" />
 			<column name="sale_date" type="DATE" jt="91" />
 			<column name="month_number" type="INT" jt="4" />
+			<column name="month_name" type="VARCHAR" length="25" jt="12" />
+			<column name="day_name" type="VARCHAR" length="15" jt="12" />
+			<column name="day_number" type="INT" jt="4" />
+			<column name="weekofMonth" type="INT" jt="4" />
+			<column name="weekofYear" type="INT" jt="4" />
+			<column name="year_sold" type="INT" jt="4" />
 			<index name="pk_dim_date" unique="PRIMARY_KEY" >
 				<column name="date_id" />
 			</index>
@@ -35,8 +42,8 @@
 		</table>
 		<table name="dim_property_type" >
 			<column name="property_type_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="building_class" type="VARCHAR" jt="12" />
-			<column name="tax_class" type="VARCHAR" jt="12" />
+			<column name="building_class" type="VARCHAR" length="2" jt="12" />
+			<column name="tax_class" type="VARCHAR" length="2" jt="12" />
 			<index name="pk_dim_property_type" unique="PRIMARY_KEY" >
 				<column name="property_type_id" />
 			</index>
@@ -84,10 +91,10 @@
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="646" y="51" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="102" y="51" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="255" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="697" y="238" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_year_built" color="C1D8EE" x="459" y="408" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="357" y="51" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="102" y="119" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="323" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_property_type" color="C1D8EE" x="697" y="323" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_year_built" color="C1D8EE" x="459" y="476" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="357" y="119" />
 	</layout>
 </project>
