@@ -2,122 +2,123 @@
 <project name="QueensRollingSales_DW_LGL" id="LogicalDesign-1125" database="LogicalDesign" >
 	<schema name="INSTANCE" catalogname="QueensRollingSales_DW_LGL" >
 		<table name="dim_businessclass" prior="dim_property_type" >
-			<column name="buildingclass_id" prior="building_class" type="INT" jt="4" mandatory="y" />
+			<column name="buildingclassID" prior="buildingclass_id" type="BIGINT" jt="-5" mandatory="y" />
 			<index name="pk_dim_property_type" unique="PRIMARY_KEY" >
-				<column name="buildingclass_id" />
+				<column name="buildingclassID" />
 			</index>
-			<fk name="fk_dim_businessclass_facts_properties" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="facts_properties" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="buildingclass_id" pk="businessclass_id" />
-			</fk>
 		</table>
 		<table name="dim_date" >
-			<column name="date_id" prior="sale_date" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="dateID" prior="date_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="dateIsoformat" prior="date_iso_format" type="DATETIME" jt="93" />
-			<column name="month_number" type="INT" jt="4" />
-			<column name="month_name" type="VARCHAR" length="25" jt="12" />
-			<column name="day_name" type="VARCHAR" length="15" jt="12" />
-			<column name="day_number" type="INT" jt="4" />
+			<column name="quarterNumber" type="INT" jt="4" />
+			<column name="monthNumber" prior="month_number" type="INT" jt="4" />
+			<column name="monthName" prior="month_name" type="VARCHAR" length="25" jt="12" />
+			<column name="dayName" prior="day_name" type="VARCHAR" length="15" jt="12" />
+			<column name="dayNumber" prior="day_number" type="INT" jt="4" />
 			<column name="weekofMonth" type="INT" jt="4" />
 			<column name="weekofYear" type="INT" jt="4" />
 			<index name="pk_dim_date" unique="PRIMARY_KEY" >
-				<column name="date_id" />
+				<column name="dateID" />
 			</index>
 		</table>
 		<table name="dim_location" prior="dim_neighborhood" >
-			<column name="location_id" prior="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="locationID" prior="location_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="address" type="VARCHAR" length="75" jt="12" />
-			<column name="zip_code" type="INT" jt="4" />
+			<column name="zipCode" prior="zip_code" type="INT" jt="4" />
 			<column name="block" type="INT" jt="4" />
 			<column name="lot" type="INT" jt="4" />
 			<index name="pk_dim_location" unique="PRIMARY_KEY" >
-				<column name="location_id" />
+				<column name="locationID" />
 			</index>
 		</table>
 		<table name="dim_neighborhoods" prior="fact_neighborhoods" >
-			<column name="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="neighborhood_name" type="VARCHAR" length="30" jt="12" />
-			<column name="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="number_sales" prior="number_of_sales" type="INT" jt="4" />
+			<column name="neighborhoodID" prior="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="neighborhoodName" prior="neighborhood_name" type="VARCHAR" length="30" jt="12" />
+			<column name="avgPrice" prior="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="maxPrice" prior="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="minPrice" prior="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="numberSales" prior="number_sales" type="INT" jt="4" />
 			<index name="pk_fact_neighborhoods" unique="PRIMARY_KEY" >
-				<column name="neighborhood_id" />
+				<column name="neighborhoodID" />
 			</index>
 		</table>
 		<table name="dim_taxclass" prior="tax_class" >
-			<column name="taxclass_id" type="INT" jt="4" mandatory="y" />
+			<column name="taxclassID" prior="taxclass_id" type="BIGINT" jt="-5" mandatory="y" />
 			<index name="pk_dim_taxclass" unique="PRIMARY_KEY" >
-				<column name="taxclass_id" />
+				<column name="taxclassID" />
 			</index>
 		</table>
 		<table name="facts_properties" >
-			<column name="fact_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="property_id" type="INT" jt="4" mandatory="y" />
-			<column name="sale_price" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="total_units" type="INT" jt="4" />
-			<column name="land_sq_feet" type="INT" jt="4" />
-			<column name="gross_sq_feet" type="INT" jt="4" />
-			<column name="residential_units" type="INT" jt="4" />
-			<column name="commercial_units" type="INT" jt="4" />
-			<column name="price_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="mean_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="square_differences_mean" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="variance_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="year_built" prior="year_build" type="INT" jt="4" />
-			<column name="sale_date" type="DATE" jt="91" />
-			<column name="year_sold" type="DATE" jt="91" />
-			<column name="neighborhood_id" prior="neighborhood_ID" type="INT" jt="4" />
-			<column name="location_id" type="INT" jt="4" />
-			<column name="taxclass_id" type="INT" jt="4" />
-			<column name="businessclass_id" type="INT" jt="4" />
+			<column name="factID" prior="fact_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="propertyID" prior="property_id" type="INT" jt="4" mandatory="y" />
+			<column name="salePrice" prior="sale_price" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="totalUnits" prior="total_units" type="INT" jt="4" />
+			<column name="landSqFeet" prior="landSqfeet" type="INT" jt="4" />
+			<column name="grossSqFeet" prior="gross_sq_feet" type="INT" jt="4" />
+			<column name="residentialUnits" prior="residential_units" type="INT" jt="4" />
+			<column name="commercialUnits" prior="commercial_units" type="INT" jt="4" />
+			<column name="pricePerSqFt" prior="price_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="meanPerSqFt" prior="meanPerSqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="squareDiffMean" prior="squareDifferencesMean" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="variancePerSqFt" prior="variance_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
+			<column name="yearBuilt" prior="year_built" type="INT" jt="4" />
+			<column name="saleDate" prior="sale_date" type="DATE" jt="91" />
+			<column name="yearSold" prior="year_sold" type="DATE" jt="91" />
+			<column name="neighborhoodID" prior="neighborhood_id" type="BIGINT" jt="-5" />
+			<column name="locationID" prior="location_id" type="BIGINT" jt="-5" />
+			<column name="taxclassID" prior="taxclass_id" type="BIGINT" jt="-5" />
+			<column name="businessclassID" type="BIGINT" jt="-5" />
 			<index name="pk_facts_properties" unique="PRIMARY_KEY" >
-				<column name="fact_id" />
-				<column name="property_id" />
+				<column name="factID" />
+				<column name="propertyID" />
 			</index>
 			<index name="unq_property_id" unique="UNIQUE_INDEX" >
-				<column name="property_id" />
+				<column name="propertyID" />
 			</index>
 			<index name="unq_neighborhood_id" unique="UNIQUE_INDEX" >
-				<column name="neighborhood_id" />
+				<column name="neighborhoodID" />
 			</index>
 			<index name="unq_taxclass_id" unique="UNIQUE_INDEX" >
-				<column name="taxclass_id" />
-			</index>
-			<index name="unq_businessclass_id" unique="UNIQUE_INDEX" >
-				<column name="businessclass_id" />
+				<column name="taxclassID" />
 			</index>
 			<index name="unq_location_id" unique="UNIQUE_INDEX" >
-				<column name="location_id" />
+				<column name="locationID" />
 			</index>
 			<index name="unq_sale_date" unique="UNIQUE_INDEX" >
-				<column name="sale_date" />
+				<column name="saleDate" />
 			</index>
 			<index name="unq_year_sold" unique="UNIQUE_INDEX" >
-				<column name="year_sold" />
+				<column name="yearSold" />
+			</index>
+			<index name="unq_businessclassID" unique="UNIQUE_INDEX" >
+				<column name="businessclassID" />
 			</index>
 			<fk name="fk_facts_properties_dim_neighborhoods" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_neighborhoods" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="neighborhood_id" pk="neighborhood_id" />
+				<fk_column name="neighborhoodID" pk="neighborhoodID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_date" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="sale_date" pk="date_id" />
+				<fk_column name="saleDate" pk="dateID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_date_0" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="year_sold" pk="date_id" />
+				<fk_column name="yearSold" pk="dateID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_location" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_location" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="location_id" pk="location_id" />
+				<fk_column name="locationID" pk="locationID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_taxclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_taxclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="taxclass_id" pk="taxclass_id" />
+				<fk_column name="taxclassID" pk="taxclassID" />
+			</fk>
+			<fk name="fk_facts_properties_dim_businessclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_businessclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="businessclassID" pk="buildingclassID" />
 			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_businessclass" color="C1D8EE" x="782" y="357" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="748" y="51" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="119" y="85" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="272" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_taxclass" color="C1D8EE" x="425" y="578" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="391" y="102" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_businessclass" color="C1D8EE" x="697" y="357" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="697" y="51" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="68" y="85" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="323" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_taxclass" color="C1D8EE" x="374" y="578" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="102" />
 	</layout>
 </project>
