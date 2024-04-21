@@ -2,8 +2,9 @@
 
 CREATE SCHEMA IF NOT EXISTS "instance";
 
-CREATE  TABLE "instance".dim_businessclass ( 
+CREATE  TABLE "instance".dim_buildingclass ( 
 	buildingclassid      bigint  NOT NULL  ,
+	buildingclassname    varchar(75)    ,
 	CONSTRAINT pk_dim_property_type PRIMARY KEY ( buildingclassid )
  );
 
@@ -41,6 +42,7 @@ CREATE  TABLE "instance".dim_neighborhoods (
 
 CREATE  TABLE "instance".dim_taxclass ( 
 	taxclassid           bigint  NOT NULL  ,
+	taxclassname         varchar(75)    ,
 	CONSTRAINT pk_dim_taxclass PRIMARY KEY ( taxclassid )
  );
 

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="QueensRollingSales_DW_LGL" id="LogicalDesign-1125" database="LogicalDesign" >
 	<schema name="INSTANCE" catalogname="QueensRollingSales_DW_LGL" >
-		<table name="dim_businessclass" prior="dim_property_type" >
-			<column name="buildingclassID" prior="buildingclass_id" type="BIGINT" jt="-5" mandatory="y" />
+		<table name="dim_buildingclass" prior="dim_businessclass" >
+			<column name="buildingClassID" prior="buildingclassID" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="buildingClassName" type="VARCHAR" length="75" jt="12" />
 			<index name="pk_dim_property_type" unique="PRIMARY_KEY" >
-				<column name="buildingclassID" />
+				<column name="buildingClassID" />
 			</index>
 		</table>
 		<table name="dim_date" >
 			<column name="dateID" prior="date_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="dateIsoformat" prior="date_iso_format" type="DATE" jt="91" />
+			<column name="dateIsoFormat" prior="dateIsoformat" type="DATE" jt="91" />
 			<column name="quarterNumber" type="INT" jt="4" />
 			<column name="monthNumber" prior="month_number" type="INT" jt="4" />
 			<column name="monthName" prior="month_name" type="VARCHAR" length="25" jt="12" />
@@ -43,9 +44,10 @@
 			</index>
 		</table>
 		<table name="dim_taxclass" prior="tax_class" >
-			<column name="taxclassID" prior="taxclass_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="taxClassID" prior="taxclassID" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="taxClassName" type="VARCHAR" length="75" jt="12" />
 			<index name="pk_dim_taxclass" unique="PRIMARY_KEY" >
-				<column name="taxclassID" />
+				<column name="taxClassID" />
 			</index>
 		</table>
 		<table name="facts_properties" >
@@ -66,7 +68,7 @@
 			<column name="yearSold" prior="year_sold" type="DATE" jt="91" />
 			<column name="neighborhoodID" prior="neighborhood_id" type="BIGINT" jt="-5" />
 			<column name="locationID" prior="location_id" type="BIGINT" jt="-5" />
-			<column name="taxclassID" prior="taxclass_id" type="BIGINT" jt="-5" />
+			<column name="taxClassID" prior="taxclassID" type="BIGINT" jt="-5" />
 			<column name="businessclassID" type="BIGINT" jt="-5" />
 			<index name="pk_facts_properties" unique="PRIMARY_KEY" >
 				<column name="factID" />
@@ -79,7 +81,7 @@
 				<column name="neighborhoodID" />
 			</index>
 			<index name="unq_taxclass_id" unique="UNIQUE_INDEX" >
-				<column name="taxclassID" />
+				<column name="taxClassID" />
 			</index>
 			<index name="unq_location_id" unique="UNIQUE_INDEX" >
 				<column name="locationID" />
@@ -106,19 +108,19 @@
 				<fk_column name="locationID" pk="locationID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_taxclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_taxclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="taxclassID" pk="taxclassID" />
+				<fk_column name="taxClassID" pk="taxClassID" />
 			</fk>
-			<fk name="fk_facts_properties_dim_businessclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_businessclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="businessclassID" pk="buildingclassID" />
+			<fk name="fk_facts_properties_dim_businessclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_buildingclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="businessclassID" pk="buildingClassID" />
 			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_businessclass" color="C1D8EE" x="697" y="357" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_buildingclass" color="C1D8EE" x="697" y="323" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="697" y="51" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="68" y="85" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="323" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_taxclass" color="C1D8EE" x="374" y="578" />
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="102" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="306" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_taxclass" color="C1D8EE" x="391" y="527" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="facts_properties" color="C1D8EE" x="340" y="51" />
 	</layout>
 </project>
