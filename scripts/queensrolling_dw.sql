@@ -10,7 +10,7 @@ CREATE  TABLE "queensrollingsales".dim_borough (
 
 CREATE  TABLE "queensrollingsales".dim_date ( 
 	date_id              bigint  NOT NULL  ,
-	dateisoformat        DATETIME    ,
+	dateisoformat        DATE    ,
 	month_number         integer    ,
 	month_name           varchar(25)    ,
 	day_name             varchar(15)    ,
