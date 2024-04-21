@@ -10,7 +10,7 @@
 		</table>
 		<table name="dim_date" >
 			<column name="date_id" prior="sale_date" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="date_iso_format" type="DATETIME" jt="93" />
+			<column name="date_iso_format" type="DATE" jt="93" />
 			<column name="month_number" type="INT" jt="4" />
 			<column name="month_name" type="VARCHAR" length="25" jt="12" />
 			<column name="day_name" type="VARCHAR" length="15" jt="12" />
