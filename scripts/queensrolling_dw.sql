@@ -1,77 +1,79 @@
-#Script to create DW 
+#script to create DW
 
-CREATE SCHEMA INSTANCE;
+CREATE SCHEMA IF NOT EXISTS "queensrollingsales";
 
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_borough ( 
-	borough_id int64 NOT NULL  ,
-	borough_name int64  
+CREATE  TABLE "queensrollingsales".dim_borough ( 
+	borough_id           integer  NOT NULL  ,
+	borough_name         integer    ,
+	CONSTRAINT pk_dim_year_built PRIMARY KEY ( borough_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_borough ADD PRIMARY KEY ( borough_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_date ( 
-	date_id int64 NOT NULL  ,
-	dateIsoformat datetime  ,
-	month_number int64  ,
-	month_name string  ,
-	day_name string  ,
-	day_number int64  ,
-	weekofMonth int64  ,
-	weekofYear int64  
+CREATE  TABLE "queensrollingsales".dim_date ( 
+	date_id              bigint  NOT NULL  ,
+	dateisoformat        DATETIME    ,
+	month_number         integer    ,
+	month_name           varchar(25)    ,
+	day_name             varchar(15)    ,
+	day_number           integer    ,
+	weekofmonth          integer    ,
+	weekofyear           integer    ,
+	CONSTRAINT pk_dim_date PRIMARY KEY ( date_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_date ADD PRIMARY KEY ( date_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_location ( 
-	location_id int64 NOT NULL  ,
-	address string  ,
-	zip_code int64  ,
-	block int64  ,
-	lot int64  
+CREATE  TABLE "queensrollingsales".dim_location ( 
+	location_id          bigint  NOT NULL  ,
+	address              varchar(75)    ,
+	zip_code             integer    ,
+	block                integer    ,
+	lot                  integer    ,
+	CONSTRAINT pk_dim_location PRIMARY KEY ( location_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_neighborhoods ( 
-	neighborhood_id int64 NOT NULL  ,
-	neighborhood_name string  ,
-	avg_price numeric  ,
-	max_price numeric  ,
-	min_price numeric  ,
-	number_sales int64  
+CREATE  TABLE "queensrollingsales".dim_neighborhoods ( 
+	neighborhood_id      bigint  NOT NULL  ,
+	neighborhood_name    varchar(30)    ,
+	avg_price            numeric(2,2)    ,
+	max_price            numeric(2,2)    ,
+	min_price            numeric(2,2)    ,
+	number_sales         integer    ,
+	CONSTRAINT pk_fact_neighborhoods PRIMARY KEY ( neighborhood_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_neighborhoods ADD PRIMARY KEY ( neighborhood_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_property_type ( 
-	property_type_id int64 NOT NULL  ,
-	building_class string  ,
-	tax_class string  
+CREATE  TABLE "queensrollingsales".dim_property_type ( 
+	property_type_id     bigint  NOT NULL  ,
+	building_class       varchar(2)    ,
+	tax_class            varchar(2)    ,
+	CONSTRAINT pk_dim_property_type PRIMARY KEY ( property_type_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.dim_property_type ADD PRIMARY KEY ( property_type_id )  NOT ENFORCED;
-
-CREATE TABLE QueensRollingSales_DW_LGL.INSTANCE.facts_properties ( 
-	fact_id int64 NOT NULL  ,
-	property_id int64 NOT NULL  ,
-	sale_price numeric  ,
-	total_units int64  ,
-	land_sq_feet int64  ,
-	gross_sq_feet int64  ,
-	residential_units int64  ,
-	commercial_units int64  ,
-	price_per_sqft numeric  ,
-	mean_per_sqft numeric  ,
-	square_differences_mean numeric  ,
-	variance_per_sqft numeric  ,
-	year_built int64  ,
-	neighborhood_id int64  ,
-	property_type_id int64  ,
-	borough_id int64  ,
-	sale_date date  ,
-	year_sold date  ,
-	location_id int64  
+CREATE  TABLE "queensrollingsales".facts_properties ( 
+	fact_id              bigint  NOT NULL  ,
+	property_id          integer  NOT NULL  ,
+	sale_price           numeric(2,2)    ,
+	total_units          integer    ,
+	land_sq_feet         integer    ,
+	gross_sq_feet        integer    ,
+	residential_units    integer    ,
+	commercial_units     integer    ,
+	price_per_sqft       numeric(2,2)    ,
+	mean_per_sqft        numeric(2,2)    ,
+	square_differences_mean numeric(2,2)    ,
+	variance_per_sqft    numeric(2,2)    ,
+	year_built           integer    ,
+	neighborhood_id      integer    ,
+	property_type_id     integer    ,
+	borough_id           integer    ,
+	sale_date            date    ,
+	year_sold            date    ,
+	location_id          integer    ,
+	CONSTRAINT pk_facts_properties PRIMARY KEY ( fact_id, property_id )
  );
 
-ALTER TABLE QueensRollingSales_DW_LGL.INSTANCE.facts_properties ADD PRIMARY KEY ( fact_id, property_id )  NOT ENFORCED;
+CREATE UNIQUE INDEX unq_property_id ON "queensrollingsales".facts_properties ( property_id );
+
+CREATE UNIQUE INDEX unq_property_type_id ON "queensrollingsales".facts_properties ( property_type_id );
+
+CREATE UNIQUE INDEX unq_neighborhood_id ON "queensrollingsales".facts_properties ( neighborhood_id );
+
+CREATE UNIQUE INDEX unq_borough_id ON "queensrollingsales".facts_properties ( borough_id );
 
