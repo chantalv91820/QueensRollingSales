@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="QueensRollingSales_DW_LGL" id="LogicalDesign-1125" database="LogicalDesign" >
 	<schema name="INSTANCE" catalogname="QueensRollingSales_DW_LGL" >
-		<table name="dim_businessclass" prior="dim_property_type" >
+		<table name="dim_buildingclasspres" prior="dim_buildingclassPres" >
 			<column name="buildingClassID" prior="buildingclassID" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="buildingClassPresName" prior="buildingClassName" type="VARCHAR" length="75" jt="12" />
 			<index name="pk_dim_property_type" unique="PRIMARY_KEY" >
 				<column name="buildingClassID" />
 			</index>
 		</table>
 		<table name="dim_date" >
 			<column name="dateID" prior="date_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="dateIsoformat" prior="date_iso_format" type="DATE" jt="91" />
+			<column name="dateIsoFormat" prior="dateIsoformat" type="DATE" jt="91" />
 			<column name="quarterNumber" type="INT" jt="4" />
 			<column name="monthNumber" prior="month_number" type="INT" jt="4" />
 			<column name="monthName" prior="month_name" type="VARCHAR" length="25" jt="12" />
@@ -34,6 +35,7 @@
 		<table name="dim_neighborhoods" prior="fact_neighborhoods" >
 			<column name="neighborhoodID" prior="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="neighborhoodName" prior="neighborhood_name" type="VARCHAR" length="30" jt="12" />
+			<column name="buildingClassDesc" prior="buildingDesc" type="VARCHAR" length="75" jt="12" />
 			<column name="avgPrice" prior="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="maxPrice" prior="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="minPrice" prior="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
@@ -109,13 +111,13 @@
 			<fk name="fk_facts_properties_dim_taxclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_taxclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="taxClassID" pk="taxClassID" />
 			</fk>
-			<fk name="fk_facts_properties_dim_businessclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_businessclass" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_properties_dim_businessclass" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_buildingclasspres" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="businessclassID" pk="buildingClassID" />
 			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-ee1" show_relation="columns" >
-		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_businessclass" color="C1D8EE" x="697" y="323" />
+		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_buildingclasspres" color="C1D8EE" x="697" y="323" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_date" color="C1D8EE" x="697" y="51" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_location" color="C1D8EE" x="68" y="85" />
 		<entity schema="QueensRollingSales_DW_LGL.INSTANCE" name="dim_neighborhoods" color="3986C1" x="51" y="306" />

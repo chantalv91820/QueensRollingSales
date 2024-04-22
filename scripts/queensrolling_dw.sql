@@ -2,9 +2,9 @@
 
 CREATE SCHEMA IF NOT EXISTS "instance";
 
-CREATE  TABLE "instance".dim_buildingclass ( 
+CREATE  TABLE "instance".dim_buildingclasspres ( 
 	buildingclassid      bigint  NOT NULL  ,
-	buildingclassname    varchar(75)    ,
+	buildingclasspresname varchar(75)    ,
 	CONSTRAINT pk_dim_property_type PRIMARY KEY ( buildingclassid )
  );
 
@@ -33,6 +33,7 @@ CREATE  TABLE "instance".dim_location (
 CREATE  TABLE "instance".dim_neighborhoods ( 
 	neighborhoodid       bigint  NOT NULL  ,
 	neighborhoodname     varchar(30)    ,
+	buildingclassdesc    varchar(75)    ,
 	avgprice             numeric(2,2)    ,
 	maxprice             numeric(2,2)    ,
 	minprice             numeric(2,2)    ,
