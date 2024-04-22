@@ -58,6 +58,7 @@
 			<column name="totalUnits" prior="total_units" type="INT" jt="4" />
 			<column name="landSqFeet" prior="landSqfeet" type="INT" jt="4" />
 			<column name="grossSqFeet" prior="gross_sq_feet" type="INT" jt="4" />
+			<column name="apartmentNumber" type="INT" jt="4" />
 			<column name="residentialUnits" prior="residential_units" type="INT" jt="4" />
 			<column name="commercialUnits" prior="commercial_units" type="INT" jt="4" />
 			<column name="pricePerSqFt" prior="price_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
