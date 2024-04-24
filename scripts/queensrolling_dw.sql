@@ -2,10 +2,24 @@
 
 CREATE SCHEMA IF NOT EXISTS "queensrollingsales";
 
-CREATE  TABLE "queensrollingsales".dim_buildingclasspres ( 
-	buildingclassid      bigint  NOT NULL  ,
-	buildingclasspresname varchar(75)    ,
-	CONSTRAINT pk_dim_property_type PRIMARY KEY ( buildingclassid )
+CREATE  TABLE "queensrollingsales".dim_borough ( 
+	boroughid            bigint  NOT NULL  ,
+	boroughname          varchar(25)    ,
+	CONSTRAINT pk_dim_borough PRIMARY KEY ( boroughid )
+ );
+
+CREATE  TABLE "queensrollingsales".dim_buildclasscategory ( 
+	buildclasscatid      bigint  NOT NULL  ,
+	buildclasscatname    varchar(100)    ,
+	CONSTRAINT pk_dim_buildclasscategory PRIMARY KEY ( buildclasscatid )
+ );
+
+CREATE  TABLE "queensrollingsales".dim_buildingclass ( 
+	buildclassid         bigint  NOT NULL  ,
+	buildtype            varchar(1)    ,
+	buildtypedescription varchar(25)    ,
+	buildclassdescription varchar(50)    ,
+	CONSTRAINT pk_dim_property_type PRIMARY KEY ( buildclassid )
  );
 
 CREATE  TABLE "queensrollingsales".dim_date ( 
@@ -27,13 +41,14 @@ CREATE  TABLE "queensrollingsales".dim_location (
 	zipcode              integer    ,
 	block                integer    ,
 	lot                  integer    ,
+	apartmentnumber      varchar(25)    ,
 	CONSTRAINT pk_dim_location PRIMARY KEY ( locationid )
  );
 
 CREATE  TABLE "queensrollingsales".dim_neighborhoods ( 
 	neighborhoodid       bigint  NOT NULL  ,
 	neighborhoodname     varchar(30)    ,
-	buildingclassdesc    varchar(75)    ,
+	buildingclasscategory varchar    ,
 	avgprice             numeric(2,2)    ,
 	maxprice             numeric(2,2)    ,
 	minprice             numeric(2,2)    ,
@@ -50,37 +65,28 @@ CREATE  TABLE "queensrollingsales".dim_taxclass (
 CREATE  TABLE "queensrollingsales".facts_properties ( 
 	factid               bigint  NOT NULL  ,
 	propertyid           integer  NOT NULL  ,
-	saleprice            numeric(2,2)    ,
+	boroughid            integer    ,
+	neighborhoodid       integer    ,
+	locationid           integer    ,
+	buildclasscatid      integer    ,
+	taxclassid           bigint    ,
+	buildclassid         bigint    ,
 	totalunits           integer    ,
 	landsqfeet           integer    ,
 	grosssqfeet          integer    ,
-	apartmentnumber      varchar(10)    ,
-	residentialunits     integer    ,
-	commercialunits      integer    ,
+	yearbuilt            integer    ,
+	saleprice            numeric(2,2)    ,
+	saledate             date    ,
+	yearsold             date    ,
 	pricepersqft         numeric(2,2)    ,
 	meanpersqft          numeric(2,2)    ,
 	squarediffmean       numeric(2,2)    ,
 	variancepersqft      numeric(2,2)    ,
-	yearbuilt            integer    ,
-	saledate             date    ,
-	yearsold             date    ,
-	neighborhoodid       bigint    ,
-	locationid           bigint    ,
-	taxclassid           bigint    ,
-	businessclassid      bigint    ,
 	CONSTRAINT pk_facts_properties PRIMARY KEY ( factid, propertyid )
  );
 
 CREATE UNIQUE INDEX unq_property_id ON "queensrollingsales".facts_properties ( propertyid );
 
-CREATE UNIQUE INDEX unq_neighborhood_id ON "queensrollingsales".facts_properties ( neighborhoodid );
-
-CREATE UNIQUE INDEX unq_taxclass_id ON "queensrollingsales".facts_properties ( taxclassid );
-
-CREATE UNIQUE INDEX unq_location_id ON "queensrollingsales".facts_properties ( locationid );
-
 CREATE UNIQUE INDEX unq_sale_date ON "queensrollingsales".facts_properties ( saledate );
 
 CREATE UNIQUE INDEX unq_year_sold ON "queensrollingsales".facts_properties ( yearsold );
-
-CREATE UNIQUE INDEX unq_businessclassid ON "queensrollingsales".facts_properties ( businessclassid );
