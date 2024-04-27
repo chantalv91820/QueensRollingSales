@@ -52,7 +52,8 @@
 		<table name="dim_neighborhoods" prior="fact_neighborhoods" >
 			<column name="neighborhoodID" prior="neighborhood_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="neighborhoodName" prior="neighborhood_name" type="VARCHAR" length="30" jt="12" />
-			<column name="buildingClassCategory" prior="buildingClassCat" type="VARCHAR" jt="12" />
+			<column name="buildClassCatID" type="INT" jt="4" />
+			<column name="buildingClassCatName" prior="buildingClassCategory" type="VARCHAR" jt="12" />
 			<column name="avgPrice" prior="avg_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="maxPrice" prior="max_price" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="minPrice" prior="min_price" type="DECIMAL" length="2" decimal="2" jt="3" />
@@ -82,8 +83,8 @@
 			<column name="grossSqFeet" prior="gross_sq_feet" type="INT" jt="4" />
 			<column name="yearBuilt" prior="year_built" type="INT" jt="4" />
 			<column name="salePrice" prior="sale_price" type="DECIMAL" length="2" decimal="2" jt="3" />
-			<column name="saleDate" prior="sale_date" type="DATE" jt="91" />
-			<column name="yearSold" prior="year_sold" type="DATE" jt="91" />
+			<column name="saleDateID" prior="saleDate" type="INT" jt="4" />
+			<column name="yearSoldID" prior="yearSold" type="INT" jt="4" />
 			<column name="pricePerSqFt" prior="price_per_sqft" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="meanPerSqFt" prior="meanPerSqft" type="DECIMAL" length="2" decimal="2" jt="3" />
 			<column name="squareDiffMean" prior="squareDifferencesMean" type="DECIMAL" length="2" decimal="2" jt="3" />
@@ -96,16 +97,16 @@
 				<column name="propertyID" />
 			</index>
 			<index name="unq_sale_date" unique="UNIQUE_INDEX" >
-				<column name="saleDate" />
+				<column name="saleDateID" />
 			</index>
 			<index name="unq_year_sold" unique="UNIQUE_INDEX" >
-				<column name="yearSold" />
+				<column name="yearSoldID" />
 			</index>
 			<fk name="fk_facts_properties_dim_date" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="saleDate" pk="dateID" />
+				<fk_column name="saleDateID" pk="dateID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_date_0" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="yearSold" pk="dateID" />
+				<fk_column name="yearSoldID" pk="dateID" />
 			</fk>
 			<fk name="fk_facts_properties_dim_borough" virtual="y" to_schema="QueensRollingSales_DW_LGL.INSTANCE" to_table="dim_borough" type="NonIdentifying" mandatory="n" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="boroughID" pk="boroughID" />

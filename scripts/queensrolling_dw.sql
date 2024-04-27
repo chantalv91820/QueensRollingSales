@@ -48,7 +48,8 @@ CREATE  TABLE "queensrollingsales".dim_location (
 CREATE  TABLE "queensrollingsales".dim_neighborhoods ( 
 	neighborhoodid       bigint  NOT NULL  ,
 	neighborhoodname     varchar(30)    ,
-	buildingclasscategory varchar    ,
+	buildclasscatid      integer    ,
+	buildingclasscatname varchar    ,
 	avgprice             numeric(2,2)    ,
 	maxprice             numeric(2,2)    ,
 	minprice             numeric(2,2)    ,
@@ -76,8 +77,8 @@ CREATE  TABLE "queensrollingsales".facts_properties (
 	grosssqfeet          integer    ,
 	yearbuilt            integer    ,
 	saleprice            numeric(2,2)    ,
-	saledate             date    ,
-	yearsold             date    ,
+	saledateid           integer    ,
+	yearsoldid           integer    ,
 	pricepersqft         numeric(2,2)    ,
 	meanpersqft          numeric(2,2)    ,
 	squarediffmean       numeric(2,2)    ,
@@ -87,6 +88,7 @@ CREATE  TABLE "queensrollingsales".facts_properties (
 
 CREATE UNIQUE INDEX unq_property_id ON "queensrollingsales".facts_properties ( propertyid );
 
-CREATE UNIQUE INDEX unq_sale_date ON "queensrollingsales".facts_properties ( saledate );
+CREATE UNIQUE INDEX unq_sale_date ON "queensrollingsales".facts_properties ( saledateid );
 
-CREATE UNIQUE INDEX unq_year_sold ON "queensrollingsales".facts_properties ( yearsold );
+CREATE UNIQUE INDEX unq_year_sold ON "queensrollingsales".facts_properties ( yearsoldid );
+
