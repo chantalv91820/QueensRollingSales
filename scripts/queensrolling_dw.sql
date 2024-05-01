@@ -1,5 +1,3 @@
-#script to create DW
-
 CREATE SCHEMA IF NOT EXISTS "queensrollingsales";
 
 CREATE  TABLE "queensrollingsales".dim_borough ( 
@@ -91,4 +89,3 @@ CREATE UNIQUE INDEX unq_property_id ON "queensrollingsales".facts_properties ( p
 CREATE UNIQUE INDEX unq_sale_date ON "queensrollingsales".facts_properties ( saledateid );
 
 CREATE UNIQUE INDEX unq_year_sold ON "queensrollingsales".facts_properties ( yearsoldid );
-
