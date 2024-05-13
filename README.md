@@ -36,7 +36,7 @@ This project analyzes property sales in Queens by neighborhood and property type
   Tableau Link: https://public.tableau.com/app/profile/chantal.villacres/viz/QueensRedo/FinalDashboard?publish=yes
   
 ## Help
-###Common problems or issues:
+### Common problems or issues:
 * Outlier properties included in dataset affecting "Minimum Price" seen in KPI's
 
 ## Thank you!
