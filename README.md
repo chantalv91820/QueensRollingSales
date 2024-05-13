@@ -9,8 +9,6 @@ This project analyzes property sales in Queens by neighborhood and property type
 ### Dependencies 
 * Postgres data warehouse to load raw data into warehouse
 
-Tableau Link: https://public.tableau.com/app/profile/chantal.villacres/viz/QueensRedo/FinalDashboard?publish=yes
-
 ### How project was created:
 * Postgres Data Warehouse Used
 * ETL code written in Python
