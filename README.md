@@ -1,5 +1,5 @@
 # Queens Rolling Sales
-Analyze property sales in Queens, NYC for 2022
+Analyze property sales in Queens, NYC during 2022
 
 ## Description
 This project analyzes property sales in Queens by neighborhood and property type. This includes Queens neighborhoods such as Bayside, Astoria, Long Island City, etc. and property types suchas single family homes, condominiums, office buildings, etc. We will analyze this data to determine what neighborhoods are rising in popularity for commerical purposes and residential purposes, and their prices.
