@@ -22,16 +22,21 @@ This project analyzes property sales in Queens by neighborhood and property type
 5. Open Tableau link to view sample visualizations
 
 ## Tableau Analysis:
-* "KPI's" include minimum, maximum, and average price per neighborhood and property type
-* "Total Properties Sold" represents most sold property types per neighborhood and their percent of the whole
-* "Average Property Price per Month" represents the average price of property types in each neighborhood per month
-* "Price per Square Feet" represents the price per square foot in each neighborhood and it's changes each month
-* "Highest to Lowest Sales" represents the neighborhoods in Queens with the highest sales during the year
+* KPI's
+    * Includes minimum, maximum, and average price per neighborhood and property type
+* Total Properties Sold
+    * Represents most sold property types per neighborhood and their percent of the whole
+* Average Property Price per Month
+    * Represents the average price of property types in each neighborhood per month
+* Price per Square Feet
+    * Represents the price per square foot in each neighborhood and it's changes each month
+* Highest to Lowest Sales
+    * Represents the neighborhoods in Queens with the highest sales during the year
   
   Tableau Link: https://public.tableau.com/app/profile/chantal.villacres/viz/QueensRedo/FinalDashboard?publish=yes
   
 ## Help
-Advice for common problems or issues:
+#Common problems or issues:
 * Outlier properties included in dataset affecting "Minimum Price" seen in KPI's
 
-Thank you!
+## Thank you!
