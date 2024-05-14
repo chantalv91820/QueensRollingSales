@@ -2,7 +2,12 @@
 Analyze property sales in Queens, NYC during 2022
 
 ## Description
-Villacres Consulting has been hired to analyze property sales in Queens by neighborhood and property type. This includes Queens neighborhoods such as Bayside, Astoria, Long Island City, etc. and property types such as single family homes, condominiums, office buildings, etc. We will analyze this data to determine what neighborhoods are rising in popularity for commerical purposes and residential purposes. We will also analyze neighborhood and property prices to determine which neighborhoods provide the most bang for their buck. 
+
+New York's 5 boroughs include Manhattan, Queens, Brooklyn, Bronx, and Staten Island. With NYC growing in popularity and population size every year we know neighborhoods and prices must change along with this.
+
+Villacres Consulting has been hired by the the City of New York to analyze property sales in Queens by neighborhood and property type. This includes Queens neighborhoods such as Bayside, Astoria, Long Island City, etc. and property types such as single family homes, condominiums, office buildings, etc. We will analyze this data to determine what neighborhoods are rising in popularity for commerical purposes and residential purposes. We will also analyze neighborhood and property prices to determine which neighborhoods provide the most bang for their buck.
+
+As of now the project scope includes only Queens, NY, but the code can be configured for future use to include all 5 NYC boroughs. 
 
 ## Getting Started
 
@@ -17,7 +22,7 @@ Villacres Consulting has been hired to analyze property sales in Queens by neigh
 ### How to install:
 1. Clone this project
 2. Open ExtractQueens.ipynb and run code to import raw data into data warehouse
-3. Open ETLQueens.ipynb and run code to clean, transform, and load cleaned data into data warehouse
+3. Open ETLQueens.ipynb and run code to clean, transform, and load cleaned data and tables into data warehouse
 4. Open QueensRolling_dw.sql to create data warehouse schema
 5. Open Tableau link to view sample visualizations
 
@@ -40,4 +45,5 @@ Villacres Consulting has been hired to analyze property sales in Queens by neigh
 * Outlier properties included in dataset affecting "Minimum Price" seen in KPI's
      * Fixed when changing property type
 
-## Thank you!
+## Results
+From Villacres Consulting's analysis, we have concluded that Queens most popular neighborhood's for residential properties are Flushing, Bayside, Richmond Hill, and Astoria. Properties in NYC range from an average of $1.3 million with the highest properties sold being single family homes, double family homes, and walk up apartment buildings. As of now Queens remains mostly a residential neighborhood, but neighborhoods like Long Island City increasing in office buildings this can soon change. Queens can soon become the next buzzing borough.
