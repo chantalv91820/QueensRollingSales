@@ -2,7 +2,7 @@
 Analyze property sales in Queens, NYC during 2022
 
 ## Description
-This project analyzes property sales in Queens by neighborhood and property type. This includes Queens neighborhoods such as Bayside, Astoria, Long Island City, etc. and property types suchas single family homes, condominiums, office buildings, etc. We will analyze this data to determine what neighborhoods are rising in popularity for commerical purposes and residential purposes, and their prices.
+Villacres Consulting has been hired to analyze property sales in Queens by neighborhood and property type. This includes Queens neighborhoods such as Bayside, Astoria, Long Island City, etc. and property types such as single family homes, condominiums, office buildings, etc. We will analyze this data to determine what neighborhoods are rising in popularity for commerical purposes and residential purposes. We will also analyze neighborhood and property prices to determine which neighborhoods provide the most bang for their buck. 
 
 ## Getting Started
 
@@ -16,8 +16,8 @@ This project analyzes property sales in Queens by neighborhood and property type
 
 ### How to install:
 1. Clone this project
-2. Open ExtractQueens.ipynb and run code to import data into data warehouse
-3. Open ETLQueens.ipynb and run code to clean, transform, and load data into data warehouse
+2. Open ExtractQueens.ipynb and run code to import raw data into data warehouse
+3. Open ETLQueens.ipynb and run code to clean, transform, and load cleaned data into data warehouse
 4. Open QueensRolling_dw.sql to create data warehouse schema
 5. Open Tableau link to view sample visualizations
 
@@ -38,5 +38,6 @@ This project analyzes property sales in Queens by neighborhood and property type
 ## Help
 ### Common problems or issues:
 * Outlier properties included in dataset affecting "Minimum Price" seen in KPI's
+     * Fixed when changing property type
 
 ## Thank you!
